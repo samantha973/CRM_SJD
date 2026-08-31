@@ -61,7 +61,54 @@ export const MEDIA_SUBTYPES = [
   "General / not sure",
 ] as const;
 
+// Pretty labels for the pipeline stages (contacts.status).
+export const CONTACT_STATUS_LABELS: Record<string, string> = {
+  new_lead: "New lead",
+  contacted: "Contacted",
+  discovery_call: "Discovery call",
+  proposal: "Proposal",
+  won: "Won",
+  lost: "Lost",
+};
+
+// Orders ---------------------------------------------------------------------
+export const ORDER_STATUSES = [
+  "pending",
+  "paid",
+  "refunded",
+  "cancelled",
+] as const;
+
+export type OrderStatus = (typeof ORDER_STATUSES)[number];
+
+export const ORDER_STATUS_LABELS: Record<string, string> = {
+  pending: "Pending",
+  paid: "Paid",
+  refunded: "Refunded",
+  cancelled: "Cancelled",
+};
+
+// Currencies we let the operator record an order in (AUD is the default).
+export const CURRENCIES = ["AUD", "USD", "GBP", "EUR", "NZD"] as const;
+export type Currency = (typeof CURRENCIES)[number];
+
 export const inquiryTypeLabel = (v: string) =>
   INQUIRY_TYPES.find((t) => t.value === v)?.label ?? v;
 export const leadSourceLabel = (v: string) =>
   LEAD_SOURCES.find((t) => t.value === v)?.label ?? v;
+export const contactStatusLabel = (v: string) =>
+  CONTACT_STATUS_LABELS[v] ?? v.replace(/_/g, " ");
+export const orderStatusLabel = (v: string) =>
+  ORDER_STATUS_LABELS[v] ?? v;
+
+// Format integer cents as a currency string, e.g. 125000 → "$1,250.00".
+export function formatAmount(cents: number, currency = "AUD") {
+  try {
+    return new Intl.NumberFormat("en-AU", {
+      style: "currency",
+      currency,
+    }).format((cents ?? 0) / 100);
+  } catch {
+    return `${((cents ?? 0) / 100).toFixed(2)} ${currency}`;
+  }
+}
