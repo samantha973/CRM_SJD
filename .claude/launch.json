@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "the-pr-hub-dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd the-pr-hub && npm run dev -- --port $PORT"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}
