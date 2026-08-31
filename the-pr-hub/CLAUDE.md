@@ -14,17 +14,17 @@
 - Plan written: done
 - Build 1 (small) status: ✅ DONE & LIVE at https://crm-sjd.vercel.app (merged PR #1, real build, submit→admin loop verified in prod). Domain decision: staying on crm-sjd.vercel.app.
 - Admin account seeded: ✅ with email samantha@theprhub.com.au (sign-in verified)
-- Build 2 (all) status: 🟡 CORE BUILT & VERIFIED (data layer), NOT yet deployed/human-tested.
-  Built behind existing login: full People directory (searchable, shows custom attributes) +
-  person record page (identity, inquiries, orders, activity timeline); Inbox = all inquiries with
-  a working pipeline (new_lead→contacted→discovery_call→proposal→won/lost) where every stage change
-  writes one activity_log row (from_status, to_status, actor=admin email, optional note); Orders list
-  + add-order against a person; Newsletter list (ok_to_contact = true) with copy-emails.
-  Verified: build passes; dedup-by-email; embedded queries; pipeline move writes exactly one
-  activity_log row; order stores cents; every /admin route redirects to login when logged out.
-  NOT DONE vs plan DoD: (a) Resend/confirmation email — DEFERRED at operator request this session
-  ("no resend for now"); (b) not committed/deployed to prod yet (awaiting operator go-ahead);
-  (c) operator has not yet run the human login+click-through test.
+- Build 2 (all) status: 🟢 CORE LIVE (merged PR #2 → prod https://crm-sjd.vercel.app on 2026-08-31);
+  email piece deferred. Built behind existing login: full People directory (searchable, shows custom
+  attributes) + person record page (identity, inquiries, orders, activity timeline); Inbox = all
+  inquiries with a working pipeline (new_lead→contacted→discovery_call→proposal→won/lost) where every
+  stage change writes one activity_log row (from_status, to_status, actor=admin email, optional note);
+  Orders list + add-order against a person; Newsletter list (ok_to_contact = true) with copy-emails.
+  Verified: build/Vercel-preview passes; dedup-by-email; embedded queries; pipeline move writes exactly
+  one activity_log row; order stores cents; every /admin route redirects to login when logged out.
+  NOT DONE vs plan DoD: (a) Resend/confirmation email — DEFERRED at operator request 2026-08-31
+  ("no resend for now"), so Build 2 is NOT fully ✅; (b) operator has not yet run the human
+  login+click-through test on prod.
 - Resend domain verified: [pending] — deferred by operator on 2026-08-31; not started. When ready:
   verify a sending domain in Resend (recommend send.theprhub.com.au subdomain so root WordPress DNS
   is untouched), set NEXT_PUBLIC_SITE_URL=https://crm-sjd.vercel.app, `npm i resend`, then wire the
