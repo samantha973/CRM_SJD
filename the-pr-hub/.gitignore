@@ -6,6 +6,9 @@
 node_modules/
 .next/
 .vercel/
+/out/
+next-env.d.ts
+*.tsbuildinfo
 
 # OS
 .DS_Store

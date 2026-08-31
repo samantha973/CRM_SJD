@@ -1,18 +1,18 @@
 # Project Catalog
 
 ## Stack (already installed and wired — record the values)
-- GitHub repo: [confirm]
-- Vercel project: [confirm]
-- Domain: [confirm]
-- Supabase project: [confirm]
-- Supabase URL: [confirm]
-- Supabase service key: [confirm]
-- Resend account: [confirm]
+- GitHub repo: samantha973/CRM_SJD (https://github.com/samantha973/CRM_SJD)
+- Vercel project: crm-sjd (scope: the-pr-hub) → prod https://crm-sjd.vercel.app; Root Directory must = the-pr-hub
+- Domain: theprhub.com.au (aliased on the crm-sjd Vercel project)
+- Supabase project: PR-Master (ref nimpqityqghejcllszzi, region ap-southeast-2)
+- Supabase URL: https://nimpqityqghejcllszzi.supabase.co
+- Supabase service key: set in .env.local + Vercel env (never committed)
+- Resend account: [pending] — not needed until Build 2
 
 ## Build (filled as we go)
 - Plan written: done
-- Build 1 (small) status: [pending]
-- Admin account seeded: [pending]
+- Build 1 (small) status: ✅ (verified locally end-to-end; live on domain pending PR merge → Vercel deploy)
+- Admin account seeded: ✅ with email samantha@theprhub.com.au (sign-in verified)
 - Build 2 (all) status: [pending]
 - Resend domain verified: [pending]
 
