@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Plan · The PR Hub</title>
+<style>
+  :root{
+    --accent:#8FE0C6;
+    --ink:#111111;
+    --charcoal:#282828;
+    --bg:#FFFFFF;
+    --muted:#6b6b6b;
+    --line:#ebebeb;
+    --soft:#f7f7f7;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:72px 28px 96px;}
+  .eyebrow{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin:0 0 14px;
+  }
+  h1{font-size:42px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:0 0 10px;}
+  h1 .dot{color:var(--accent);}
+  .sub{font-size:18px;color:var(--muted);margin:0 0 8px;font-weight:500;}
+  h2{
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+    color:var(--ink);margin:64px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line);
+  }
+  h3{font-size:22px;font-weight:750;letter-spacing:-.01em;margin:0 0 6px;}
+  p{margin:0 0 16px;}
+  .lead{font-size:19px;line-height:1.55;}
+  .accentbar{border-left:3px solid var(--accent);padding-left:18px;}
+  .card{
+    background:var(--soft);border:1px solid var(--line);border-radius:14px;
+    padding:26px 28px;margin:20px 0;
+  }
+  .not{background:#fff;border:1px dashed #d9d9d9;border-radius:14px;padding:22px 26px;color:var(--muted);}
+  .kv{display:grid;grid-template-columns:210px 1fr;gap:2px 22px;margin:8px 0 0;}
+  .kv dt{font-weight:650;color:var(--ink);padding:9px 0;border-top:1px solid var(--line);}
+  .kv dd{margin:0;padding:9px 0;border-top:1px solid var(--line);color:#333;}
+  .pill{
+    display:inline-block;background:var(--accent);color:#0c2b23;font-weight:650;
+    font-size:12px;letter-spacing:.02em;padding:3px 10px;border-radius:999px;margin:2px 6px 2px 0;
+  }
+  .tag{
+    display:inline-block;background:#eef0ef;color:#333;font-weight:600;
+    font-size:12px;padding:3px 10px;border-radius:6px;margin:2px 6px 2px 0;
+  }
+  .block{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:26px 0;}
+  .block .head{background:var(--charcoal);color:#fff;padding:22px 28px;}
+  .block .head .num{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;}
+  .block .head h3{color:#fff;margin:6px 0 0;}
+  .block .body{padding:8px 28px 28px;}
+  .goal{font-size:17px;color:#222;}
+  .label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:26px 0 12px;}
+  ul.check{list-style:none;margin:0;padding:0;}
+  ul.check li{position:relative;padding:8px 0 8px 34px;border-top:1px solid var(--line);}
+  ul.check li:first-child{border-top:none;}
+  ul.check li::before{
+    content:"";position:absolute;left:0;top:12px;width:18px;height:18px;border-radius:5px;
+    border:2px solid var(--accent);background:#fff;
+  }
+  ul.check li::after{
+    content:"";position:absolute;left:6px;top:15px;width:5px;height:9px;
+    border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);
+  }
+  .foot{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Product Plan</p>
+  <h1>The PR Hub<span class="dot">.</span></h1>
+  <p class="sub">A lead-capture and pipeline CRM — so no inquiry sits on the founder.</p>
+
+  <h2>What we're actually building and why</h2>
+  <div class="accentbar">
+    <p class="lead">After this exists, every lead — inbound, referred, or cold — lands in one
+    place the moment it arrives and can be picked up and moved forward by anyone on the team,
+    so The PR Hub stops depending on the founder to catch, sort, and chase new business by hand.</p>
+  </div>
+  <div class="card">
+    <p style="margin:0 0 6px;"><strong>Who it's for</strong></p>
+    <p style="margin:0;">The operator is a trained lead-manager seat (today the senior account
+    director, by design anyone capable) — not the founder. The whole point is to take intake off
+    Samantha. On the other side of the form: a founder-led, high-growth business exploring PR — an
+    ongoing partnership, a defined project, a speaking or partnership approach, or a media enquiry.</p>
+  </div>
+  <div class="not">
+    <strong style="color:var(--ink);">Deliberately NOT building:</strong> no affiliates, no
+    subscriptions, no cohorts, no analytics dashboards, no integrations beyond what's named here.
+    No discovery-call transcription or AI call-analysis — that runs <em>after</em> a lead is
+    captured and is out of scope today. If it isn't load-bearing for capturing and working a lead,
+    it's out.
+  </div>
+
+  <h2>The interview, in brief</h2>
+  <dl class="kv">
+    <dt>Business</dt>
+    <dd>Strategic PR &amp; corporate communications advisory for founder-led, high-growth,
+      technology-enabled businesses. We turn commercial performance and milestones into external
+      credibility — we make founders and their businesses famous, in service of the business.</dd>
+    <dt>The gap today</dt>
+    <dd>Leads arrive through five doors and land nowhere central; they're copied into a Google Sheet
+      by hand and chased by the founder or 2IC — so response is slow and doesn't scale.</dd>
+    <dt>90-day win</dt>
+    <dd>A solid system handling inbound <em>and</em> cold leads, run by someone other than the
+      founder, converting to two new customers onboarded per month.</dd>
+    <dt>Volume</dt>
+    <dd>~3–4 inbound inquiries a week today, growing via cold outreach.</dd>
+    <dt>Inquiry types</dt>
+    <dd>
+      <span class="tag">ongoing_partnership</span><span class="tag">project</span>
+      <span class="tag">speaking_workshop</span><span class="tag">strategic_partnership</span>
+      <span class="tag">media_other</span>
+    </dd>
+    <dt>Lead source (separate)</dt>
+    <dd>existing_client, former_client, eo_network, event, website, outbound, strategic_partner,
+      referral — referral is a source, not a type.</dd>
+    <dt>Design system</dt>
+    <dd>Minimalist Apple — clean, white space, calm, premium; mint used sparingly as one confident pop.</dd>
+    <dt>Brand colors</dt>
+    <dd>
+      <span class="pill">Mint #8FE0C6</span>
+      <span class="tag">Ink #111111</span>
+      <span class="tag">Charcoal #282828</span>
+      <span class="tag">White #FFFFFF</span>
+    </dd>
+    <dt>Custom attributes</dt>
+    <dd>business_stage (list), why_now / buying trigger (list), next_follow_up (date).</dd>
+    <dt>Domain</dt>
+    <dd>theprhub.com.au</dd>
+  </dl>
+
+  <h2>Build blocks</h2>
+
+  <div class="block">
+    <div class="head">
+      <span class="num">Build 1 · small</span>
+      <h3>Prove the loop</h3>
+    </div>
+    <div class="body">
+      <p class="label" style="margin-top:22px;">Goal</p>
+      <p class="goal">A stranger can submit an inquiry on the live site and I can see that lead
+        inside /admin, on the same day, without anyone touching the database by hand. This closes
+        the exact gap named in Q1 — the smallest thing that proves the whole system works end to end.
+        Nothing else matters until this is real.</p>
+
+      <p class="label">Scope</p>
+      <p>The People and Contacts tables with custom attributes wired into the jsonb column; a working
+        contact form on the live marketing site that writes a People row (upserted by email) and a
+        linked Contacts row; one admin login with a single verified account; one admin page listing
+        incoming leads newest first.</p>
+
+      <p class="label">Definition of Done</p>
+      <ul class="check">
+        <li>The contact form is live on the real domain, not localhost.</li>
+        <li>Submitting creates exactly one People row and one linked Contacts row, deduplicated by email on repeat submits.</li>
+        <li>My chosen custom attributes are saved correctly inside <code>attributes</code>.</li>
+        <li>A new Contacts row lands in status <code>new_lead</code>.</li>
+        <li>I can log in to /admin with my one seeded account.</li>
+        <li>The admin leads page shows the submission within seconds, newest first.</li>
+        <li>I personally run the full flow once: submit as a visitor, log in, see it.</li>
+      </ul>
+
+      <p class="label">Success Criteria</p>
+      <ul class="check">
+        <li>From a cold start, submit to visible in under 60 seconds.</li>
+        <li>Two submissions from the same email produce one person, not two.</li>
+        <li>I can read the lead's name, type, message, and custom attributes on the admin page without opening Supabase.</li>
+        <li>No lead can land and go unseen — the failure mode named in Q1.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="head">
+      <span class="num">Build 2 · all</span>
+      <h3>Make it the system I run the business from</h3>
+    </div>
+    <div class="body">
+      <p class="label" style="margin-top:22px;">Goal</p>
+      <p class="goal">Turn the proven loop into the place I actually manage relationships and money.
+        After this, I work leads, record what people bought, and keep my newsletter list entirely
+        from /admin behind my login, and every new lead gets an automatic confirmation email. This
+        is what makes the 90-day win achievable.</p>
+
+      <p class="label">Scope</p>
+      <p>The rest of the /admin back end behind my login: the full People directory, all inquiries
+        with working pipeline stages, the Orders list, and the Newsletter list (ok_to_contact = true).
+        Plus Resend wired so a confirmation email fires on form submit. Every Contacts status change
+        writes an activity_log row.</p>
+
+      <p class="label">Definition of Done</p>
+      <ul class="check">
+        <li>All four parts (People, Contacts, Orders, Newsletter) are visible and usable in /admin, and all of /admin sits behind my login.</li>
+        <li>I can move a Contacts row through new_lead → contacted → discovery_call → proposal → won or lost from the interface.</li>
+        <li>Each status change writes one activity_log row with from_status, to_status, and actor.</li>
+        <li>The People directory is searchable and shows my custom attributes.</li>
+        <li>I can add an Orders row against a person and see it on their record.</li>
+        <li>The Newsletter list shows everyone with ok_to_contact = true.</li>
+        <li>Resend is connected, the sending domain is verified, and a real confirmation email arrives after a form submit.</li>
+      </ul>
+
+      <p class="label">Success Criteria</p>
+      <ul class="check">
+        <li>I can run a lead from first inquiry to won without leaving /admin or touching the database.</li>
+        <li>A person's full history — inquiries, status changes, and orders — is visible in one place.</li>
+        <li>A test submission produces a confirmation email in the inbox, not spam, with my domain as the sender.</li>
+        <li>Nothing in /admin is reachable without logging in.</li>
+        <li>At my real inquiry volume (~3–4 inbound a week, targeting two customers onboarded a month), this keeps up without me dropping to the database by hand.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="foot">The PR Hub · Product plan. Matches Working Files/product-plan.md. If anything here
+  disagrees with CLAUDE.md, CLAUDE.md wins.</p>
+
+</div>
+</body>
+</html>

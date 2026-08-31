@@ -1,0 +1,39 @@
+# ── Secrets — never commit ──
+.env
+.env.*
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+
+# ── Dependencies ──
+node_modules/
+**/node_modules/
+
+# ── Build output ──
+.next/
+**/.next/
+out/
+**/out/
+dist/
+build/
+.vercel/
+**/.vercel/
+
+# ── Claude local ──
+.claude/settings.local.json
+**/.claude/settings.local.json
+.claude/worktrees/
+**/.claude/worktrees/
+
+# ── Scratch / working space ──
+**/context/source-material/working_files/
+
+# ── System / editor ──
+.DS_Store
+**/.DS_Store
+*.psd
+*.ai
+*.mov
+*.mp4

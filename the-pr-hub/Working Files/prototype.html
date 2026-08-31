@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype · The PR Hub CRM</title>
+<style>
+  :root{
+    --accent:#8FE0C6;
+    --accent-ink:#0c2b23;
+    --ink:#111111;
+    --charcoal:#282828;
+    --bg:#FFFFFF;
+    --muted:#6b6b6b;
+    --line:#ececec;
+    --soft:#f7f8f7;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:#f2f3f2;color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.55;
+  }
+
+  /* top switcher */
+  .topbar{
+    position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;
+    padding:14px 26px;
+  }
+  .brand{font-weight:800;letter-spacing:-.02em;font-size:18px;}
+  .brand .g{color:var(--accent);}
+  .brand .dot{color:var(--accent);}
+  .switch{margin-left:auto;display:inline-flex;background:#eef0ef;border-radius:999px;padding:4px;}
+  .switch button{
+    border:0;background:transparent;font:inherit;font-weight:600;font-size:13px;color:var(--muted);
+    padding:7px 16px;border-radius:999px;cursor:pointer;
+  }
+  .switch button.on{background:var(--ink);color:#fff;}
+
+  .view{display:none;}
+  .view.on{display:block;}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 26px 80px;}
+
+  /* ---------- PUBLIC SITE ---------- */
+  .hero{max-width:680px;margin:26px auto 34px;text-align:center;}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .hero h1{font-size:44px;line-height:1.08;letter-spacing:-.025em;font-weight:800;margin:14px 0 12px;}
+  .hero h1 .g{color:var(--accent);}
+  .hero p{font-size:18px;color:var(--muted);margin:0;}
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:20px;
+    box-shadow:0 1px 2px rgba(0,0,0,.03),0 12px 34px rgba(0,0,0,.05);
+  }
+  .form-card{max-width:640px;margin:0 auto;padding:34px 36px 32px;}
+  .form-card h2{font-size:20px;font-weight:750;margin:0 0 4px;letter-spacing:-.01em;}
+  .form-card .hint{color:var(--muted);font-size:14px;margin:0 0 24px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field{margin-bottom:16px;}
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  label .req{color:#c0392b;}
+  input,select,textarea{
+    width:100%;font:inherit;font-size:14.5px;color:var(--ink);background:#fff;
+    border:1px solid #dcdedc;border-radius:11px;padding:11px 13px;outline:none;transition:border-color .15s,box-shadow .15s;
+  }
+  input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(143,224,198,.35);}
+  textarea{resize:vertical;min-height:96px;}
+  .checkline{display:flex;align-items:center;gap:10px;margin:6px 0 22px;font-size:14px;color:#333;}
+  .checkline input{width:auto;}
+  .submit{
+    width:100%;border:0;background:var(--ink);color:#fff;font:inherit;font-weight:650;font-size:15px;
+    padding:14px;border-radius:12px;cursor:pointer;transition:transform .05s ease,background .15s;
+  }
+  .submit:hover{background:#000;}
+  .submit:active{transform:translateY(1px);}
+  .thanks{
+    display:none;text-align:center;padding:30px 20px;
+  }
+  .thanks.on{display:block;}
+  .thanks .tick{width:56px;height:56px;border-radius:999px;background:var(--accent);margin:0 auto 16px;position:relative;}
+  .thanks .tick::after{content:"";position:absolute;left:20px;top:15px;width:12px;height:22px;border:solid var(--accent-ink);border-width:0 3px 3px 0;transform:rotate(45deg);}
+  .thanks h2{margin:0 0 6px;font-size:22px;}
+  .thanks p{color:var(--muted);margin:0 0 18px;}
+  .link-btn{background:none;border:0;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;}
+
+  /* ---------- ADMIN ---------- */
+  .admin-head{display:flex;align-items:flex-end;gap:14px;margin:6px 0 22px;}
+  .admin-head h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:0;}
+  .admin-head .count{color:var(--muted);font-size:14px;margin-bottom:3px;}
+  .admin-head .live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted);}
+  .dotpulse{width:8px;height:8px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 0 rgba(143,224,198,.7);animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(143,224,198,.6);}70%{box-shadow:0 0 0 9px rgba(143,224,198,0);}100%{box-shadow:0 0 0 0 rgba(143,224,198,0);}}
+
+  .leads{overflow:hidden;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  thead th{
+    text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--soft);
+  }
+  tbody td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:hover{background:#fafbfa;}
+  .who{font-weight:650;}
+  .who small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:1px;}
+  .pill{display:inline-block;font-size:11.5px;font-weight:650;padding:3px 9px;border-radius:999px;background:#eef0ef;color:#2c2c2c;white-space:nowrap;}
+  .pill.type{background:#e9f9f2;color:#0c6b4f;}
+  .pill.src{background:#f0eefc;color:#4b3ba8;}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:650;color:var(--accent-ink);background:var(--accent);padding:4px 11px;border-radius:999px;}
+  .msg{color:#444;max-width:280px;}
+  .attrs{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px;}
+  .attr{font-size:11px;color:#555;background:#f3f4f3;border:1px solid #e7e8e7;border-radius:6px;padding:2px 7px;}
+  .when{color:var(--muted);font-size:12.5px;white-space:nowrap;}
+  .new-flash{animation:flash 2.2s ease;}
+  @keyframes flash{0%{background:#e9f9f2;}100%{background:transparent;}}
+  .empty{text-align:center;color:var(--muted);padding:50px 20px;}
+
+  .note{max-width:1000px;margin:20px auto 0;padding:0 26px;color:#8a8a8a;font-size:12.5px;text-align:center;}
+  @media(max-width:640px){.row{grid-template-columns:1fr;}.hero h1{font-size:34px;}}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="brand">the<span class="g">pr</span>hub<span class="dot">.</span></span>
+    <span style="font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em;">PROTOTYPE</span>
+    <div class="switch">
+      <button id="tabPublic" class="on" onclick="showView('public')">Public site</button>
+      <button id="tabAdmin" onclick="showView('admin')">/admin</button>
+    </div>
+  </div>
+
+  <!-- ============ PUBLIC ============ -->
+  <section id="publicView" class="view on">
+    <div class="wrap">
+      <div class="hero">
+        <div class="eyebrow">Work with us</div>
+        <h1>Let's make your business <span class="g">famous.</span></h1>
+        <p>Tell us what you're working toward. We'll be in touch within one business day.</p>
+      </div>
+
+      <div class="card form-card">
+        <div id="formInner">
+          <h2>Start a conversation</h2>
+          <p class="hint">A few details so the right person can pick this up.</p>
+
+          <div class="row">
+            <div class="field">
+              <label>Name <span class="req">*</span></label>
+              <input id="f_name" placeholder="Jane Founder" value="Jane Founder">
+            </div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input id="f_email" placeholder="jane@company.com" value="jane@northstar.io">
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>Company</label>
+              <input id="f_company" placeholder="Company name" value="Northstar">
+            </div>
+            <div class="field">
+              <label>Role</label>
+              <input id="f_role" placeholder="Founder / CEO" value="Founder &amp; CEO">
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>What's this about? <span class="req">*</span></label>
+              <select id="f_type">
+                <option value="ongoing_partnership">Ongoing PR &amp; communications partnership</option>
+                <option value="project">Defined project, campaign or announcement</option>
+                <option value="speaking_workshop">Speaking or workshop request</option>
+                <option value="strategic_partnership">Strategic partnership or collaboration</option>
+                <option value="media_other">Media or other enquiry</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>How did you hear about us?</label>
+              <select id="f_source">
+                <option value="referral">Referral</option>
+                <option value="existing_client">Existing client</option>
+                <option value="former_client">Former client</option>
+                <option value="eo_network">EO / network</option>
+                <option value="event">Event</option>
+                <option value="website" selected>Website</option>
+                <option value="outbound">Outbound</option>
+                <option value="strategic_partner">Strategic partner</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label>Business stage</label>
+              <select id="f_stage">
+                <option>Startup</option>
+                <option selected>Scale-up</option>
+                <option>Established</option>
+                <option>Enterprise</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>What's prompting this now?</label>
+              <select id="f_why">
+                <option>Capital raise</option>
+                <option>M&amp;A</option>
+                <option selected>Expansion</option>
+                <option>Founder profile</option>
+                <option>Rebrand-reposition</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Tell us a little more</label>
+            <textarea id="f_msg">We've just closed our Series A and are expanding into the UK. Our profile hasn't kept pace with the business — we need a partner to shape the story.</textarea>
+          </div>
+
+          <div class="checkline">
+            <input type="checkbox" id="f_ok" checked>
+            <label for="f_ok" style="margin:0;font-weight:500;">Keep me posted with the occasional insight (newsletter)</label>
+          </div>
+
+          <button class="submit" onclick="submitLead()">Send inquiry</button>
+        </div>
+
+        <div id="thanks" class="thanks">
+          <div class="tick"></div>
+          <h2>Thanks — we've got it.</h2>
+          <p>Someone from the team will be in touch within one business day.</p>
+          <button class="link-btn" onclick="resetForm()">← Submit another (demo)</button>
+        </div>
+      </div>
+
+      <p class="note">This is the visitor's view. Hit <strong>Send inquiry</strong>, then switch to
+      <strong>/admin</strong> up top — your new lead is already there.</p>
+    </div>
+  </section>
+
+  <!-- ============ ADMIN ============ -->
+  <section id="adminView" class="view">
+    <div class="wrap">
+      <div class="admin-head">
+        <h1>Leads</h1>
+        <span class="count" id="leadCount">3 inquiries · newest first</span>
+        <span class="live"><span class="dotpulse"></span> Live</span>
+      </div>
+
+      <div class="card leads">
+        <table>
+          <thead>
+            <tr>
+              <th>Who</th>
+              <th>Type</th>
+              <th>Source</th>
+              <th>Message &amp; details</th>
+              <th>Status</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody id="leadRows"></tbody>
+        </table>
+      </div>
+
+      <p class="note">Open and unprotected in this prototype — in the real build, /admin sits behind
+      your login. Everything a trained team member needs to pick up a lead, in one place.</p>
+    </div>
+  </section>
+
+<script>
+  var TYPE_LABEL = {
+    ongoing_partnership:"Ongoing partnership",
+    project:"Project / campaign",
+    speaking_workshop:"Speaking / workshop",
+    strategic_partnership:"Strategic partnership",
+    media_other:"Media / other"
+  };
+  var SRC_LABEL = {
+    referral:"Referral", existing_client:"Existing client", former_client:"Former client",
+    eo_network:"EO / network", event:"Event", website:"Website", outbound:"Outbound",
+    strategic_partner:"Strategic partner"
+  };
+
+  // seed data — what an operator would already see
+  var leads = [
+    {name:"Marcus Lee", email:"marcus@brightlab.co", company:"BrightLab", role:"Co-founder",
+     type:"ongoing_partnership", source:"eo_network", status:"discovery_call",
+     msg:"Post-raise, want consistent founder visibility over 12 months.",
+     stage:"Scale-up", why:"Founder profile", follow:"2026-09-04", when:"2 days ago"},
+    {name:"Priya Nand", email:"priya@wavefreight.com", company:"WaveFreight", role:"CMO",
+     type:"project", source:"referral", status:"contacted",
+     msg:"Launching a new logistics product in Q4 — need a campaign around it.",
+     stage:"Established", why:"Expansion", follow:"2026-09-02", when:"Yesterday"},
+    {name:"Tom Alvarez", email:"tom@ledgerloop.io", company:"LedgerLoop", role:"CEO",
+     type:"speaking_workshop", source:"event", status:"new_lead",
+     msg:"Would love Samantha to run a founder-comms workshop for our EO chapter.",
+     stage:"Startup", why:"Other", follow:"2026-09-01", when:"6 hours ago"}
+  ];
+
+  function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+  function statusLabel(s){
+    return {new_lead:"New lead",contacted:"Contacted",discovery_call:"Discovery call",
+            proposal:"Proposal",won:"Won",lost:"Lost"}[s]||s;
+  }
+
+  function render(flashFirst){
+    var tb = document.getElementById('leadRows');
+    tb.innerHTML = "";
+    if(!leads.length){ tb.innerHTML = '<tr><td colspan="6" class="empty">No leads yet.</td></tr>'; }
+    leads.forEach(function(l,i){
+      var tr = document.createElement('tr');
+      if(flashFirst && i===0) tr.className = "new-flash";
+      tr.innerHTML =
+        '<td class="who">'+esc(l.name)+'<small>'+esc(l.company)+(l.role?' · '+esc(l.role):'')+'</small><small>'+esc(l.email)+'</small></td>'+
+        '<td><span class="pill type">'+esc(TYPE_LABEL[l.type]||l.type)+'</span></td>'+
+        '<td><span class="pill src">'+esc(SRC_LABEL[l.source]||l.source)+'</span></td>'+
+        '<td class="msg">'+esc(l.msg)+
+          '<div class="attrs">'+
+            '<span class="attr">Stage: '+esc(l.stage)+'</span>'+
+            '<span class="attr">Why now: '+esc(l.why)+'</span>'+
+            '<span class="attr">Follow-up: '+esc(l.follow)+'</span>'+
+          '</div>'+
+        '</td>'+
+        '<td><span class="status">'+esc(statusLabel(l.status))+'</span></td>'+
+        '<td class="when">'+esc(l.when)+'</td>';
+      tb.appendChild(tr);
+    });
+    document.getElementById('leadCount').textContent =
+      leads.length + (leads.length===1?" inquiry":" inquiries") + " · newest first";
+  }
+
+  function showView(v){
+    document.getElementById('publicView').classList.toggle('on', v==='public');
+    document.getElementById('adminView').classList.toggle('on', v==='admin');
+    document.getElementById('tabPublic').classList.toggle('on', v==='public');
+    document.getElementById('tabAdmin').classList.toggle('on', v==='admin');
+    window.scrollTo(0,0);
+  }
+
+  function submitLead(){
+    var name = document.getElementById('f_name').value.trim() || "Someone";
+    var email = document.getElementById('f_email').value.trim().toLowerCase();
+    var lead = {
+      name:name, email:email,
+      company:document.getElementById('f_company').value.trim(),
+      role:document.getElementById('f_role').value.trim(),
+      type:document.getElementById('f_type').value,
+      source:document.getElementById('f_source').value,
+      status:"new_lead",
+      msg:document.getElementById('f_msg').value.trim(),
+      stage:document.getElementById('f_stage').value,
+      why:document.getElementById('f_why').value,
+      follow:new Date(Date.now()+3*864e5).toISOString().slice(0,10),
+      when:"Just now"
+    };
+    // dedupe by email — upsert, don't duplicate the person
+    var existing = leads.findIndex(function(l){return l.email===email && email;});
+    if(existing>-1){ leads.splice(existing,1); }
+    leads.unshift(lead);
+    render(true);
+    // show thank-you
+    document.getElementById('formInner').style.display='none';
+    document.getElementById('thanks').classList.add('on');
+  }
+
+  function resetForm(){
+    document.getElementById('thanks').classList.remove('on');
+    document.getElementById('formInner').style.display='block';
+  }
+
+  render(false);
+</script>
+</body>
+</html>
